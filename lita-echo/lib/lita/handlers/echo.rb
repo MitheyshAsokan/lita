@@ -1,9 +1,13 @@
 module Lita
   module Handlers
     class Echo < Handler
-      # insert handler code here
+      route(/^echo\s+(.+)/, :echo, help: { "echo TEXT" => "Echoes back TEXT." })
 
-      Lita.register_handler(self)
+      def echo(response)
+        response.reply(response.matches)
+      end
     end
+
+    Lita.register_handler(Echo)
   end
 end
